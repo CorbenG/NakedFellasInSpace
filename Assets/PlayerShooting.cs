@@ -10,12 +10,16 @@ public class PlayerShooting : MonoBehaviour
     public GameObject AmmoTypeDisplay;
     public GameObject Projectile;
     public GameObject Camera;
+    public GameObject Gun;
+    public GameObject Graphics;
     public float DisplayLerpSpeed;
+    public float StartingOffest;
+    AudioSource GunSound;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        GunSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,18 +52,22 @@ public class PlayerShooting : MonoBehaviour
 
     void HandleShooting()
     {
+        Vector3 MousePosition = Input.mousePosition;
+        MousePosition.z = 0.0f;
+        Vector3 WorldMousePosition = Camera.GetComponent<Camera>().ScreenToWorldPoint(MousePosition);
+        Vector3 ProjectileDirection = new Vector3(WorldMousePosition.x - transform.position.x, WorldMousePosition.y - transform.position.y, 0).normalized;
+        Gun.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2((WorldMousePosition.y - Gun.transform.position.y) * Graphics.transform.localScale.x, (WorldMousePosition.x - Gun.transform.position.x) * Graphics.transform.localScale.x) * Mathf.Rad2Deg);
+        Graphics.transform.localScale = new Vector3(Mathf.Sign(ProjectileDirection.x)*1.0f,Graphics.transform.localScale.y,Graphics.transform.localScale.z);
+
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 MousePosition = Input.mousePosition;
-            MousePosition.z = 0.0f;
-            Vector3 WorldMousePosition = Camera.GetComponent<Camera>().ScreenToWorldPoint(MousePosition);
-            Vector3 ProjectileDirection = new Vector3(WorldMousePosition.x - transform.position.x, WorldMousePosition.y - transform.position.y, 0).normalized;
-
-
-            GameObject NewProjectile = Instantiate(Projectile, transform.position, Quaternion.identity);
+            GameObject NewProjectile = Instantiate(Projectile, transform.position + ProjectileDirection * StartingOffest, Quaternion.identity);
             NewProjectile.GetComponent<ProjectileMover>().MovementDirection = ProjectileDirection;
             NewProjectile.GetComponent<ProjectileMover>().AmmoType = AmmoType;
             // Debug.Log(AmmoType);
+            GunSound.pitch = Random.Range(0.9f, 1.1f);
+            GunSound.Play();
+
         }
     }
 }

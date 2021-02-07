@@ -356,7 +356,7 @@ Transform:
   m_GameObject: {fileID: 9136993367091692043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.42085, y: 0.42085, z: 0.42085}
   m_Children:
   - {fileID: 3121921737517197787}
   - {fileID: 1619329578956269354}
@@ -378,8 +378,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementDirection: {x: 1, y: 0, z: 0}
-  MovementSpeed: 10
-  RotationSpeed: 1000
+  MovementSpeed: 50
+  RotationSpeed: 5000
   sprites:
   - {fileID: 3173673664108789476}
   - {fileID: 1967313492964022618}

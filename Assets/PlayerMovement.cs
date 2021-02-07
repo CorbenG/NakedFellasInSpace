@@ -34,11 +34,11 @@ public class PlayerMovement : MonoBehaviour
             CurrentLerp = AccelerationLerp;
             if (PlayerInput.x > 0.5f)
             {
-                graphics.transform.localScale = new Vector3(1, 1,1);
+                //graphics.transform.localScale = new Vector3(1, 1,1);
             }
             if (PlayerInput.x < 0.5f)
             {
-                graphics.transform.localScale = new Vector3(-1, 1, 1);
+                //graphics.transform.localScale = new Vector3(-1, 1, 1);
             }
         }
 
