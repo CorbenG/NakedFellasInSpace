@@ -34,17 +34,19 @@ public class PlayerShooting : MonoBehaviour
     {
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0)
+            
+            if (Input.GetAxis("Mouse ScrollWheel") > 0.0f)
             {
                 AmmoType += AmmoType;
             }
-            if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            if (Input.GetAxis("Mouse ScrollWheel") < 0.0f)
             {
                 AmmoType -= AmmoType;
             }
-
+            Debug.Log(AmmoType);
             if (AmmoType >= 4) AmmoType -= 4;
             if (AmmoType <= -1) AmmoType += 4;
+            
         }
 
         AmmoTypeDisplay.transform.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(AmmoTypeDisplay.transform.localEulerAngles.z, 90.0f * AmmoType, Time.deltaTime * DisplayLerpSpeed));
@@ -67,6 +69,9 @@ public class PlayerShooting : MonoBehaviour
             // Debug.Log(AmmoType);
             GunSound.pitch = Random.Range(0.9f, 1.1f);
             GunSound.Play();
+
+            Camera.GetComponent<CameraShaker>().ShakeAmplitude += Camera.GetComponent<CameraShaker>().ShotShake;
+            Camera.GetComponent<CameraShaker>().JerkOffest += ProjectileDirection * Camera.GetComponent<CameraShaker>().ShotJerk;
 
         }
     }
