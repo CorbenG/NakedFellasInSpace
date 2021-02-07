@@ -25,6 +25,7 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         HandleAmmoTypeDisplay();
         HandleShooting();
         
@@ -34,19 +35,18 @@ public class PlayerShooting : MonoBehaviour
     {
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            
+
             if (Input.GetAxis("Mouse ScrollWheel") > 0.0f)
             {
-                AmmoType += AmmoType;
+                AmmoType += 1;
             }
             if (Input.GetAxis("Mouse ScrollWheel") < 0.0f)
             {
-                AmmoType -= AmmoType;
+                AmmoType -= 1;
             }
-            Debug.Log(AmmoType);
             if (AmmoType >= 4) AmmoType -= 4;
             if (AmmoType <= -1) AmmoType += 4;
-            
+
         }
 
         AmmoTypeDisplay.transform.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(AmmoTypeDisplay.transform.localEulerAngles.z, 90.0f * AmmoType, Time.deltaTime * DisplayLerpSpeed));
