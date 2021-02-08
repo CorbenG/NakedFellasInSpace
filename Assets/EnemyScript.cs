@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     public GameController Game;
-    ProjectileMover projectile;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +19,7 @@ public class EnemyScript : MonoBehaviour
     {
         if(hit.gameObject.GetComponent<ProjectileMover>() != null)
         {
-            Game.score += 100;
+            Game.updateScore(100);
             Destroy(hit.gameObject);
             Destroy(this.gameObject);
         }

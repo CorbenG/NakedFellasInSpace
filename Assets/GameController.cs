@@ -17,4 +17,10 @@ public class GameController : MonoBehaviour
     {
         scoretext.text = "Score: " + score;
     }
+
+    public void updateScore (int scoring)
+    {
+        score += scoring;
+        //Animate here
+    }
 }
