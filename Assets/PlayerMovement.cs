@@ -45,7 +45,9 @@ public class PlayerMovement : MonoBehaviour
         speed.x = Mathf.Lerp(speed.x, PlayerInput.normalized.x * MaxSpeed, Time.deltaTime * CurrentLerp);
         speed.y = Mathf.Lerp(speed.y, PlayerInput.normalized.y * MaxSpeed, Time.deltaTime * CurrentLerp);
 
-        body.MovePosition(transform.position + speed * Time.deltaTime);
+        body.velocity = speed;
+
+
 
         float VerticalSquish = Mathf.Pow(MaxSquish, Mathf.Min(Mathf.Abs(speed.y) / MaxSpeed, 1) * Mathf.Sign(speed.y));
         float MovementTilt = Mathf.Min(Mathf.Abs(speed.x) / MaxSpeed , 1) * MaxTilt * (-1.0f) * Mathf.Sign(speed.x);
@@ -53,10 +55,11 @@ public class PlayerMovement : MonoBehaviour
         graphics.transform.localScale = new Vector3(graphics.transform.localScale.x, VerticalSquish, 1);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "WorldBorder")
         {
+            body.velocity = Vector3.zero;
             speed -= new Vector3(9.0f * transform.position.x, 16.0f * transform.position.y, 0.0f) * BorderPushbackForce;
         }
 

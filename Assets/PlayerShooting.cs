@@ -64,17 +64,21 @@ public class PlayerShooting : MonoBehaviour
         anim.SetBool("Shoot", false);
         if (Input.GetMouseButtonDown(0))
         {
+            anim.SetBool("Hold", true);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            anim.SetBool("Hold", false);
+            anim.SetBool("Shoot", true);
             GameObject NewProjectile = Instantiate(Projectile, transform.position + ProjectileDirection * StartingOffest, Quaternion.identity);
             NewProjectile.GetComponent<ProjectileMover>().MovementDirection = ProjectileDirection;
             NewProjectile.GetComponent<ProjectileMover>().AmmoType = AmmoType;
             // Debug.Log(AmmoType);
-            anim.SetBool("Shoot", true);
             GunSound.pitch = Random.Range(0.9f, 1.1f);
             GunSound.Play();
 
             Camera.GetComponent<CameraShaker>().ShakeAmplitude += Camera.GetComponent<CameraShaker>().ShotShake;
             Camera.GetComponent<CameraShaker>().JerkOffest += ProjectileDirection * Camera.GetComponent<CameraShaker>().ShotJerk;
-
         }
     }
 }

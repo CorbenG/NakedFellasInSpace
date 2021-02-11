@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementDirection: {x: 1, y: 0, z: 0}
-  MovementSpeed: 50
+  MovementSpeed: 12
   RotationSpeed: 5000
   sprites:
   - {fileID: 3173673664108789476}

@@ -995,8 +995,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSpeed: 10
   AccelerationLerp: 10
-  DecelerationLerp: 3
-  BorderPushbackForce: 0.5
+  DecelerationLerp: 2
+  BorderPushbackForce: 0.2
   MaxTilt: 15
   MaxSquish: 1.2
   graphics: {fileID: 1611470926}

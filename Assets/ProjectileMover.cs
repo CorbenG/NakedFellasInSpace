@@ -24,7 +24,7 @@ public class ProjectileMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        body.MovePosition(transform.position + MovementDirection * Time.deltaTime * MovementSpeed);
+        body.velocity = MovementDirection * MovementSpeed;
         body.MoveRotation(body.rotation + Time.deltaTime * RotationSpeed);
     }
 
