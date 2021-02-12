@@ -12,10 +12,15 @@ public class PlayerShooting : MonoBehaviour
     public GameObject Camera;
     public GameObject Gun;
     public GameObject Graphics;
+    public GameObject Border;
     public float DisplayLerpSpeed;
     public float StartingOffest;
+    public float ColorLerp;
+    public Color[] ammotypeColors;
     AudioSource GunSound;
     public Animator anim;
+    Color currentAmmoColor;
+
     
     // Start is called before the first frame update
     void Start()
@@ -49,7 +54,8 @@ public class PlayerShooting : MonoBehaviour
             if (AmmoType <= -1) AmmoType += 4;
 
         }
-
+        currentAmmoColor = Color.Lerp(currentAmmoColor, ammotypeColors[AmmoType], Time.deltaTime * ColorLerp);
+        Border.GetComponent<SpriteRenderer>().color = currentAmmoColor;
         AmmoTypeDisplay.transform.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(AmmoTypeDisplay.transform.localEulerAngles.z, 90.0f * AmmoType, Time.deltaTime * DisplayLerpSpeed));
     }
 
