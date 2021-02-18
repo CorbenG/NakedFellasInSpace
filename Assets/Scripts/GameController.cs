@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject enemyPrefab;
+    public float spawnTime;
+    private float spawnTimerCounter;
+    public float spawnIncreaseFactor;
     public int score;
     public Text scoretext;
     public GameObject textContainer;
@@ -27,7 +31,12 @@ public class GameController : MonoBehaviour
         scoreAnimationSpeed = Mathf.Lerp(scoreAnimationSpeed, -scoreAnimationPosition * scoreBouncyness, Time.deltaTime * scoreSpeed);
         scoreAnimationPosition += scoreAnimationSpeed * Time.deltaTime;
         textContainer.GetComponent<RectTransform>().localScale = new Vector3(Mathf.Pow(scoreAmplitude,scoreAnimationPosition), Mathf.Pow(scoreAmplitude,-scoreAnimationPosition),1);
-        
+        if(spawnTimerCounter <= 0)
+        {
+            Instantiate(enemyPrefab, new Vector3(Random.Range(-7, 7), Random.Range(-3, 3), 0), transform.rotation);
+            spawnTimerCounter = spawnTime;
+        }
+        spawnTimerCounter -= Time.deltaTime + (Time.time / spawnIncreaseFactor);
     }
 
     public void updateScore (int scoring)
