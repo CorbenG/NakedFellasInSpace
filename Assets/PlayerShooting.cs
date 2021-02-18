@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -55,7 +56,7 @@ public class PlayerShooting : MonoBehaviour
 
         }
         currentAmmoColor = Color.Lerp(currentAmmoColor, ammotypeColors[AmmoType], Time.deltaTime * ColorLerp);
-        Border.GetComponent<SpriteRenderer>().color = currentAmmoColor;
+        Border.GetComponent<Image>().color = currentAmmoColor;
         AmmoTypeDisplay.transform.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(AmmoTypeDisplay.transform.localEulerAngles.z, 90.0f * AmmoType, Time.deltaTime * DisplayLerpSpeed));
     }
 
