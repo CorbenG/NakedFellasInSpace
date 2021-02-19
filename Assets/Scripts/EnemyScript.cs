@@ -28,6 +28,7 @@ public class EnemyScript : MonoBehaviour
 
     bool id1_satisfied = false;
     bool id2_satisfied = false;
+    float rotation_speed = 0.0f;
     
     // Start is called before the first frame update
     void Start()
@@ -44,13 +45,15 @@ public class EnemyScript : MonoBehaviour
         speed = Random.Range(minSpeed, maxSpeed);
         Instantiate(spawnAnim, transform.position, transform.rotation);
         sprite = GetComponent<SpriteRenderer>();
+        rotation_speed = Random.Range(-100, 100);
     }
 
     // Update is called once per frame
     void Update()
     {
+        rb.rotation += rotation_speed*Time.deltaTime;
         //Once spawned
-        if(sprite.enabled == true)
+        if (sprite.enabled == true)
         {
             rb.velocity = randomDir * speed;
         }
@@ -81,12 +84,14 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.tag == "WorldBorderTop")
         {
             randomDir = new Vector2(randomDir.x, -randomDir.y);
+            rotation_speed *= -1;
             BounceNoise();
         }
         if (collision.gameObject.tag == "WorldBorderSide")
         {
             randomDir = new Vector2(-randomDir.x, randomDir.y);
             BounceNoise();
+            rotation_speed *= -1;
         }
     }
 
