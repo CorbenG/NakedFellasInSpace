@@ -20,7 +20,11 @@ public class PlayerShooting : MonoBehaviour
     public Color[] ammotypeColors;
     AudioSource GunSound;
     public Animator anim;
+    public float shootCooldown;
+    float cooldownTimer = 0;
     Color currentAmmoColor;
+    bool MouseDown = true;
+    bool fired = true;
 
     
     // Start is called before the first frame update
@@ -69,12 +73,16 @@ public class PlayerShooting : MonoBehaviour
         Gun.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2((WorldMousePosition.y - Gun.transform.position.y) * Graphics.transform.localScale.x, (WorldMousePosition.x - Gun.transform.position.x) * Graphics.transform.localScale.x) * Mathf.Rad2Deg);
         Graphics.transform.localScale = new Vector3(Mathf.Sign(ProjectileDirection.x)*1.0f,Graphics.transform.localScale.y,Graphics.transform.localScale.z);
         anim.SetBool("Shoot", false);
-        if (Input.GetMouseButtonDown(0))
+        cooldownTimer += Time.deltaTime;
+        if (MouseDown)
         {
             anim.SetBool("Hold", true);
+            fired = false;
         }
-        if (Input.GetMouseButtonUp(0))
+        else if (!MouseDown && !fired)
         {
+            fired = true;
+            cooldownTimer = 0;
             anim.SetBool("Hold", false);
             anim.SetBool("Shoot", true);
             GameObject NewProjectile = Instantiate(Projectile, transform.position + ProjectileDirection * StartingOffest, Quaternion.identity);
@@ -86,6 +94,14 @@ public class PlayerShooting : MonoBehaviour
 
             Camera.GetComponent<CameraShaker>().ShakeAmplitude += Camera.GetComponent<CameraShaker>().ShotShake;
             Camera.GetComponent<CameraShaker>().JerkOffest += ProjectileDirection * Camera.GetComponent<CameraShaker>().ShotJerk;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            MouseDown = true;
+        }
+        if (!Input.GetMouseButton(0) && cooldownTimer >= shootCooldown)
+        {
+            MouseDown = false;
         }
     }
 }

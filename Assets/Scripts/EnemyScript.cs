@@ -8,12 +8,16 @@ public class EnemyScript : MonoBehaviour
     public float minSpeed;
     public float maxSpeed;
     public float bouncePower;
+    public GameObject spawnAnim;
 
     GameController Game;
     Vector2 randomDir;
     Rigidbody2D rb;
     float speed;
     GameObject newBounceSound;
+    SpriteRenderer sprite;
+    float spawnTime = 0.1f;
+    float spawnTimer = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -23,13 +27,28 @@ public class EnemyScript : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, Random.Range(0f, 360f));
         randomDir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         speed = Random.Range(minSpeed, maxSpeed);
-        
+        Instantiate(spawnAnim, transform.position, transform.rotation);
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = randomDir * speed;
+        //Once spawned
+        if(sprite.enabled == true)
+        {
+            rb.velocity = randomDir * speed;
+        }
+        
+        //Hide until animation spawns in
+        if(spawnTimer >= spawnTime && sprite.enabled == false)
+        {
+            sprite.enabled = true;
+        }
+        else
+        {
+            spawnTimer += Time.deltaTime;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
