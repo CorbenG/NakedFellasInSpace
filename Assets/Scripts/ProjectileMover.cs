@@ -40,7 +40,7 @@ public class ProjectileMover : MonoBehaviour
     IEnumerator WaitAndDestroy()
     {
         yield return new WaitForSeconds(5);
-        Debug.Log("destroyed self due to timeout");
+        //Debug.Log("destroyed self due to timeout");
         Destroy(gameObject);
     }
 }

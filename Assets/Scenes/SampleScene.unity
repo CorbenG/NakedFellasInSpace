@@ -2569,17 +2569,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 803969506774657569, guid: 173d8f9b7cc16ca4a85e9649f69e2373, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 803969506774657571, guid: 173d8f9b7cc16ca4a85e9649f69e2373, type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 803969506774657571, guid: 173d8f9b7cc16ca4a85e9649f69e2373, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 803969506774657574, guid: 173d8f9b7cc16ca4a85e9649f69e2373, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.86
+      value: -12.44
       objectReference: {fileID: 0}
     - target: {fileID: 803969506774657574, guid: 173d8f9b7cc16ca4a85e9649f69e2373, type: 3}
       propertyPath: m_LocalPosition.y
