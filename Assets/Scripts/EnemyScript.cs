@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     public GameObject alienSprite;
+    public GameObject bubbleSprite;
     public GameObject bounceSound;
+    public GameObject voiceSound;
     public float minSpeed;
     public float maxSpeed;
     public float bouncePower;
@@ -14,6 +16,7 @@ public class EnemyScript : MonoBehaviour
     public float shakeSize;
     public float shakeSpeed;
     public GameObject spawnAnim;
+    public GameObject fadeAnim;
     public GameObject display_1;
     public GameObject display_2;
     public Color[] request_colors;
@@ -35,6 +38,8 @@ public class EnemyScript : MonoBehaviour
     bool id1_satisfied = false;
     bool id2_satisfied = false;
     float rotation_speed = 0.0f;
+
+    float voicePitch;
     
     // Start is called before the first frame update
     void Start()
@@ -52,11 +57,18 @@ public class EnemyScript : MonoBehaviour
         Instantiate(spawnAnim, transform.position, transform.rotation);
         sprite = alienSprite.GetComponent<SpriteRenderer>();
         rotation_speed = Random.Range(-100, 100);
+        voicePitch = Random.Range(0, 2.5f);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (voicePitch < 0.5)
+        {
+            voicePitch = Random.Range(-2.5f, 2.5f);
+        }
+
         freezeTimer += Time.deltaTime;
         rb.rotation += rotation_speed*Time.deltaTime;
 
@@ -68,6 +80,7 @@ public class EnemyScript : MonoBehaviour
         else
         {
             spawnTimer += Time.deltaTime;
+            alienSprite.GetComponent<Animator>().SetTrigger("Bounce");
         }
 
         if (freezeTimer >= freezeTime)
@@ -77,7 +90,8 @@ public class EnemyScript : MonoBehaviour
             GetComponent<CircleCollider2D>().enabled = false;
             display_1.SetActive(false);
             display_2.SetActive(false);
-            if(Vector3.Magnitude(transform.position) > 12)
+            bubbleSprite.SetActive(false);
+            if (Vector3.Magnitude(transform.position) > 12)
             {
                 Destroy(this.gameObject);
             }
@@ -135,16 +149,28 @@ public class EnemyScript : MonoBehaviour
         newBounceSound.GetComponent<AudioSource>().volume = 0.5f;
     }
 
+    void VoiceNoise()
+    {
+        newBounceSound = Instantiate(voiceSound);
+        newBounceSound.GetComponent<AudioSource>().pitch = voicePitch;
+    }
+
     public void get_clothes(int id)
     {
         if ((id == request_id1) && !id1_satisfied)
         {
+            alienSprite.GetComponent<Animator>().speed = 1;
+            alienSprite.GetComponent<Animator>().SetTrigger("Bounce");
+            VoiceNoise();
             freezeTimer -= freezeTime / 2;
             id1_satisfied = true;
             Game.updateScore(100);
         } 
         else if ((id == request_id2) && !id2_satisfied)
         {
+            alienSprite.GetComponent<Animator>().speed = 1;
+            alienSprite.GetComponent<Animator>().SetTrigger("Bounce");
+            VoiceNoise();
             freezeTimer -= freezeTime / 2;
             id2_satisfied = true;
             Game.updateScore(100);
@@ -152,6 +178,7 @@ public class EnemyScript : MonoBehaviour
 
         if (id1_satisfied && id2_satisfied)
         {
+            Instantiate(fadeAnim, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
