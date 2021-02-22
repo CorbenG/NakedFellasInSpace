@@ -26,19 +26,30 @@ public class PlayerShooting : MonoBehaviour
     bool MouseDown = true;
     bool fired = true;
 
-    
+    GameController game;
+
     // Start is called before the first frame update
     void Start()
     {
         GunSound = GetComponent<AudioSource>();
+        game = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //If game isn't over
+        if (!game.gameOver)
+        {
+            HandleAmmoTypeDisplay();
+            HandleShooting();
+        }
+        //If game is over
+        else
+        {
 
-        HandleAmmoTypeDisplay();
-        HandleShooting();
+        }
+        
         
     }
 
@@ -76,15 +87,18 @@ public class PlayerShooting : MonoBehaviour
         cooldownTimer += Time.deltaTime;
         if (MouseDown)
         {
-            anim.SetBool("Hold", true);
+            //anim.SetBool("Hold", true);
             fired = false;
         }
         else if (!MouseDown && !fired)
         {
             fired = true;
             cooldownTimer = 0;
+            anim.SetTrigger("Shooting");
+            /*
             anim.SetBool("Hold", false);
             anim.SetBool("Shoot", true);
+            */
             GameObject NewProjectile = Instantiate(Projectile, transform.position + ProjectileDirection * StartingOffest, Quaternion.identity);
             NewProjectile.GetComponent<ProjectileMover>().MovementDirection = ProjectileDirection;
             NewProjectile.GetComponent<ProjectileMover>().AmmoType = AmmoType;

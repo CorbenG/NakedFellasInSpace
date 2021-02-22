@@ -20,12 +20,14 @@ public class PlayerMovement : MonoBehaviour
     Vector2 speed = Vector2.zero;
     Rigidbody2D body;
     GameObject Camera;
+    GameController game;
     Vector2 velocity;
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         Camera = GameObject.FindGameObjectWithTag("MainCamera");
+        game = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -54,51 +56,60 @@ public class PlayerMovement : MonoBehaviour
         speed.x = Mathf.Lerp(speed.x, PlayerInput.normalized.x * MaxSpeed, Time.deltaTime * CurrentLerp);
         speed.y = Mathf.Lerp(speed.y, PlayerInput.normalized.y * MaxSpeed, Time.deltaTime * CurrentLerp);
         */
+        if (!game.gameOver)
+        {
 
-        //Calculate velocty based on input
-        velocity = Vector2.ClampMagnitude(velocity + new Vector2(Input.GetAxisRaw("Horizontal") * AccelerationFactor * Time.deltaTime, 
-            Input.GetAxisRaw("Vertical") * AccelerationFactor * Time.deltaTime), MaxSpeed);
+            //Calculate velocty based on input
+            velocity = Vector2.ClampMagnitude(velocity + new Vector2(Input.GetAxisRaw("Horizontal") * AccelerationFactor * Time.deltaTime,
+                Input.GetAxisRaw("Vertical") * AccelerationFactor * Time.deltaTime), MaxSpeed);
 
-        //Slow down if no input
-        if(Input.GetAxisRaw("Horizontal") == 0)
+            //Slow down if no input
+            if (Input.GetAxisRaw("Horizontal") == 0)
+            {
+                velocity.x = velocity.x / DecelerationFactor;
+            }
+            if (Input.GetAxisRaw("Vertical") == 0)
+            {
+                velocity.y = velocity.y / DecelerationFactor;
+            }
+
+            //Limit position to world bounds
+            if (transform.position.x > xWorldBounds)
+            {
+                transform.position = new Vector3(xWorldBounds, transform.position.y, 0);
+            }
+            else if (transform.position.x < -xWorldBounds)
+            {
+                transform.position = new Vector3(-xWorldBounds, transform.position.y, 0);
+            }
+            if (transform.position.y > yWorldBounds)
+            {
+                transform.position = new Vector3(transform.position.x, yWorldBounds, 0);
+            }
+            else if (transform.position.y < -yWorldBounds)
+            {
+                transform.position = new Vector3(transform.position.x, -yWorldBounds, 0);
+            }
+
+
+            //Update position
+            transform.position = new Vector3(transform.position.x + velocity.x * Time.deltaTime, transform.position.y + velocity.y * Time.deltaTime, 0);
+
+            //body.velocity = speed;
+
+
+            //Squish and strech character to reflect movement
+            float VerticalSquish = Mathf.Pow(MaxSquish, Mathf.Min(Mathf.Abs(velocity.y) / MaxSpeed, 1) * Mathf.Sign(velocity.y));
+            float MovementTilt = Mathf.Min(Mathf.Abs(velocity.x) / MaxSpeed, 1) * MaxTilt * (-1.0f) * Mathf.Sign(velocity.x);
+            graphics.transform.localEulerAngles = new Vector3(0, 0, MovementTilt);
+            graphics.transform.localScale = new Vector3(graphics.transform.localScale.x, VerticalSquish, 1);
+        }
+        //If game is over
+        else
         {
             velocity.x = velocity.x / DecelerationFactor;
-        }
-        if (Input.GetAxisRaw("Vertical") == 0)
-        {
             velocity.y = velocity.y / DecelerationFactor;
         }
-
-        //Limit position to world bounds
-        if(transform.position.x > xWorldBounds)
-        {
-            transform.position = new Vector3(xWorldBounds, transform.position.y, 0);
-        }
-        else if (transform.position.x < -xWorldBounds)
-        {
-            transform.position = new Vector3(-xWorldBounds, transform.position.y, 0);
-        }
-        if (transform.position.y > yWorldBounds)
-        {
-            transform.position = new Vector3(transform.position.x, yWorldBounds, 0);
-        }
-        else if (transform.position.y < -yWorldBounds)
-        {
-            transform.position = new Vector3(transform.position.x, -yWorldBounds, 0);
-        }
-
-
-        //Update position
-        transform.position = new Vector3(transform.position.x + velocity.x * Time.deltaTime, transform.position.y + velocity.y * Time.deltaTime, 0);
-
-        //body.velocity = speed;
-
-
-        //Squish and strech character to reflect movement
-        float VerticalSquish = Mathf.Pow(MaxSquish, Mathf.Min(Mathf.Abs(velocity.y) / MaxSpeed, 1) * Mathf.Sign(velocity.y));
-        float MovementTilt = Mathf.Min(Mathf.Abs(velocity.x) / MaxSpeed , 1) * MaxTilt * (-1.0f) * Mathf.Sign(velocity.x);
-        graphics.transform.localEulerAngles = new Vector3(0, 0, MovementTilt);
-        graphics.transform.localScale = new Vector3(graphics.transform.localScale.x, VerticalSquish, 1);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {

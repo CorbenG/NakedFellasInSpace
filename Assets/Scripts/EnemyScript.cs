@@ -45,14 +45,15 @@ public class EnemyScript : MonoBehaviour
     float jiggle_offset = 0f;
     float jiggle_speed = 0f;
     Vector3 sprite_origin;
+    bool lostLife = false;
    
     
     // Start is called before the first frame update
     void Start()
     {
         id2_satisfied = needs_one;
-        request_id1 = Random.Range(0, 3);
-        request_id2 = Random.Range(0, 3);
+        request_id1 = Random.Range(0, 4);
+        request_id2 = Random.Range(0, 4);
 
 
         Game = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -98,6 +99,11 @@ public class EnemyScript : MonoBehaviour
             display_1.SetActive(false);
             display_2.SetActive(false);
             bubbleSprite.SetActive(false);
+            if (!lostLife)
+            {
+                Game.health -= 1;
+                lostLife = true;
+            }
             if (Vector3.Magnitude(transform.position) > 12)
             {
                 Destroy(this.gameObject);
