@@ -116,7 +116,8 @@ public class PlayerMovement : MonoBehaviour
         //Screen shake and bounce for every collision
         if (collision.gameObject.tag == "WorldBorderTop" || collision.gameObject.tag == "WorldBorderSide")
         {
-            Instantiate(bounceSound);
+            GameObject newBounceSound = Instantiate(bounceSound);
+            newBounceSound.GetComponent<AudioSource>().volume = 0.2f;
             Camera.GetComponent<CameraShaker>().ShakeAmplitude += Camera.GetComponent<CameraShaker>().ShotShake;
             //Variable shake depending on speed of impact
             Camera.GetComponent<CameraShaker>().JerkOffest += new Vector3(transform.position.x / 9f * (velocity.magnitude / MaxSpeed), transform.position.y / 6f * (velocity.magnitude / MaxSpeed), 0);

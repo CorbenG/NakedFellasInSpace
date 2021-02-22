@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     public GameObject alienSprite;
+    public SpriteRenderer freezeSprite;
     public GameObject bubbleSprite;
     public GameObject bounceSound;
     public GameObject voiceSound;
@@ -22,6 +23,8 @@ public class EnemyScript : MonoBehaviour
     public GameObject display_1;
     public GameObject display_2;
     public Color[] request_colors;
+    public Color[] alien_colors;
+    public Color[] freezing_colors;
 
     GameController Game;
     Vector2 randomDir;
@@ -42,6 +45,7 @@ public class EnemyScript : MonoBehaviour
     float rotation_speed = 0.0f;
 
     float voicePitch;
+    Color skinColor;
 
     float jiggle_offset = 0f;
     float jiggle_speed = 0f;
@@ -66,7 +70,8 @@ public class EnemyScript : MonoBehaviour
         sprite = alienSprite.GetComponent<SpriteRenderer>();
         rotation_speed = Random.Range(-100, 100);
         voicePitch = Random.Range(0, 2.5f);
-        
+        skinColor = alien_colors[Random.Range(0, alien_colors.Length)];
+        sprite.color = skinColor;
     }
 
     // Update is called once per frame
@@ -164,7 +169,7 @@ public class EnemyScript : MonoBehaviour
     void BounceNoise()
     {
         newBounceSound = Instantiate(bounceSound);
-        newBounceSound.GetComponent<AudioSource>().volume = 0.5f;
+        newBounceSound.GetComponent<AudioSource>().volume = 0.1f;
     }
 
     void VoiceNoise()
@@ -207,7 +212,7 @@ public class EnemyScript : MonoBehaviour
     void Shake(float amplitude)
     {
         squisher.transform.localPosition = new Vector3(Random.Range(-amplitude,amplitude),Random.Range(-amplitude, amplitude), 0);
-        sprite.color = Color.Lerp(Color.white, Color.cyan, amplitude/shakeSize);
+        freezeSprite.color = Color.Lerp(freezing_colors[0], freezing_colors[1], amplitude/shakeSize);
         //alienSprite.GetComponent<Animator>().SetBool("Shaking", true);
         //alienSprite.GetComponent<Animator>().speed = (freezeTimer - shakeTime) / (freezeTime - shakeTime);
         /*
