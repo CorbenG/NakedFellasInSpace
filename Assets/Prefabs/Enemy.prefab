@@ -34,7 +34,7 @@ Transform:
   - {fileID: 7558747567121288939}
   - {fileID: 9116647657261333811}
   - {fileID: 2466276302933236756}
-  - {fileID: 691026902108445400}
+  - {fileID: 8087179471691118780}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54,6 +54,7 @@ MonoBehaviour:
   bubbleSprite: {fileID: 6487019433043121401}
   bounceSound: {fileID: 6037235827620382486, guid: 1cd3ecfd9607aa5459ab4b04addf1b22, type: 3}
   voiceSound: {fileID: 5525279633594346110, guid: 6d1195242b304944e849e98dcbe9fee3, type: 3}
+  squisher: {fileID: 1831056832405570501}
   minSpeed: 2
   maxSpeed: 4
   bouncePower: 0.2
@@ -231,12 +232,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1553368667428236806}
-  m_LocalRotation: {x: -0, y: -0, z: -0.18864562, w: 0.98204523}
-  m_LocalPosition: {x: 0.49, y: -1.12, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 803969506774657574}
-  m_RootOrder: 3
+  m_Father: {fileID: 8087179471691118780}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -21.748}
 --- !u!212 &491436839067765686
 SpriteRenderer:
@@ -308,6 +309,37 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1831056832405570501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8087179471691118780}
+  m_Layer: 0
+  m_Name: animation parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8087179471691118780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831056832405570501}
+  m_LocalRotation: {x: -0, y: -0, z: -0.18864562, w: 0.98204523}
+  m_LocalPosition: {x: 0.48999888, y: -1.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 691026902108445400}
+  m_Father: {fileID: 803969506774657574}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4087444401764116453
 GameObject:
   m_ObjectHideFlags: 0

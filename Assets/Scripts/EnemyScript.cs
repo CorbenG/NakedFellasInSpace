@@ -8,6 +8,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject bubbleSprite;
     public GameObject bounceSound;
     public GameObject voiceSound;
+    public GameObject squisher;
     public float minSpeed;
     public float maxSpeed;
     public float bouncePower;
@@ -40,6 +41,11 @@ public class EnemyScript : MonoBehaviour
     float rotation_speed = 0.0f;
 
     float voicePitch;
+
+    float jiggle_offset = 0f;
+    float jiggle_speed = 0f;
+    Vector3 sprite_origin;
+   
     
     // Start is called before the first frame update
     void Start()
@@ -64,6 +70,7 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        jiggle();
         if (voicePitch < 0.5)
         {
             voicePitch = Random.Range(-2.5f, 2.5f);
@@ -86,7 +93,7 @@ public class EnemyScript : MonoBehaviour
         if (freezeTimer >= freezeTime)
         {
             sprite.color = Color.blue;
-            alienSprite.GetComponent<Animator>().SetBool("Shaking", false);
+            //alienSprite.GetComponent<Animator>().SetBool("Shaking", false);
             GetComponent<CircleCollider2D>().enabled = false;
             display_1.SetActive(false);
             display_2.SetActive(false);
@@ -100,11 +107,11 @@ public class EnemyScript : MonoBehaviour
         else if (freezeTimer > freezeTime - shakeTime)
         {
             //Shake
-            Shake();
+            Shake(((freezeTimer - freezeTime + shakeTime) / shakeTime) * shakeSize);
         }
         else
         {
-            alienSprite.GetComponent<Animator>().SetBool("Shaking", false);
+            //alienSprite.GetComponent<Animator>().SetBool("Shaking", false);
             //Hide until animation spawns in
             if (spawnTimer >= spawnTime && sprite.enabled == false)
             {
@@ -131,12 +138,14 @@ public class EnemyScript : MonoBehaviour
         }
         if (collision.gameObject.tag == "WorldBorderTop")
         {
+            bop_it(50);
             randomDir = new Vector2(randomDir.x, -randomDir.y);
             rotation_speed *= -1;
             BounceNoise();
         }
         if (collision.gameObject.tag == "WorldBorderSide")
         {
+            bop_it(50);
             randomDir = new Vector2(-randomDir.x, randomDir.y);
             BounceNoise();
             rotation_speed *= -1;
@@ -159,8 +168,9 @@ public class EnemyScript : MonoBehaviour
     {
         if ((id == request_id1) && !id1_satisfied)
         {
-            alienSprite.GetComponent<Animator>().speed = 1;
-            alienSprite.GetComponent<Animator>().SetTrigger("Bounce");
+            //alienSprite.GetComponent<Animator>().speed = 1;
+            //alienSprite.GetComponent<Animator>().SetTrigger("Bounce");
+            bop_it(100);
             VoiceNoise();
             freezeTimer -= freezeTime / 2;
             id1_satisfied = true;
@@ -168,8 +178,9 @@ public class EnemyScript : MonoBehaviour
         } 
         else if ((id == request_id2) && !id2_satisfied)
         {
-            alienSprite.GetComponent<Animator>().speed = 1;
-            alienSprite.GetComponent<Animator>().SetTrigger("Bounce");
+            //alienSprite.GetComponent<Animator>().speed = 1;
+            //alienSprite.GetComponent<Animator>().SetTrigger("Bounce");
+            bop_it(100);
             VoiceNoise();
             freezeTimer -= freezeTime / 2;
             id2_satisfied = true;
@@ -184,10 +195,12 @@ public class EnemyScript : MonoBehaviour
     }
 
     
-    void Shake()
+    void Shake(float amplitude)
     {
-        alienSprite.GetComponent<Animator>().SetBool("Shaking", true);
-        alienSprite.GetComponent<Animator>().speed = (freezeTimer - shakeTime) / (freezeTime - shakeTime);
+        squisher.transform.localPosition = new Vector3(Random.Range(-amplitude,amplitude),Random.Range(-amplitude, amplitude), 0);
+        sprite.color = Color.Lerp(Color.white, Color.cyan, amplitude/shakeSize);
+        //alienSprite.GetComponent<Animator>().SetBool("Shaking", true);
+        //alienSprite.GetComponent<Animator>().speed = (freezeTimer - shakeTime) / (freezeTime - shakeTime);
         /*
         if(alienSprite.transform.position.x < shakeSize && alienSprite.transform.position.x > -shakeSize)
         {
@@ -201,5 +214,18 @@ public class EnemyScript : MonoBehaviour
             alienSprite.transform.position.y + Random.Range(-shakeSpeed, shakeSpeed), alienSprite.transform.position.z);
         */
     }
-    
+
+    private void bop_it(float strength)
+    {
+        jiggle_speed += strength;
+    }
+
+    private void jiggle()
+    {
+        float jiggle_amp = 1.4f;
+        jiggle_speed = Mathf.Lerp(jiggle_speed, -jiggle_offset * 30, Time.deltaTime*20);
+        jiggle_offset += jiggle_speed * Time.deltaTime;
+        squisher.transform.localScale = new Vector3(Mathf.Pow(jiggle_amp, jiggle_offset), Mathf.Pow(jiggle_amp,-jiggle_offset), 0);
+    }
+
 }
