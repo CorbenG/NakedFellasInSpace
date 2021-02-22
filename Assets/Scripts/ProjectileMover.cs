@@ -18,6 +18,7 @@ public class ProjectileMover : MonoBehaviour
         sprites[1].SetActive(AmmoType == 1);
         sprites[2].SetActive(AmmoType == 2);
         sprites[3].SetActive(AmmoType == 3);
+        GetComponent<TrailRenderer>().startColor = sprites[AmmoType].GetComponent<SpriteRenderer>().color;
         yield return StartCoroutine("WaitAndDestroy");
     }
 
