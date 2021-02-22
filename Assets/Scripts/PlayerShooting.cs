@@ -14,6 +14,7 @@ public class PlayerShooting : MonoBehaviour
     public GameObject Gun;
     public GameObject Graphics;
     public GameObject Border;
+    public GameObject yarn;
     public float DisplayLerpSpeed;
     public float StartingOffest;
     public float ColorLerp;
@@ -72,6 +73,8 @@ public class PlayerShooting : MonoBehaviour
         }
         currentAmmoColor = Color.Lerp(currentAmmoColor, ammotypeColors[AmmoType], Time.deltaTime * ColorLerp);
         Border.GetComponent<Image>().color = currentAmmoColor;
+        yarn.GetComponent<SpriteRenderer>().color = currentAmmoColor;
+
         AmmoTypeDisplay.transform.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(AmmoTypeDisplay.transform.localEulerAngles.z, 90.0f * AmmoType, Time.deltaTime * DisplayLerpSpeed));
     }
 

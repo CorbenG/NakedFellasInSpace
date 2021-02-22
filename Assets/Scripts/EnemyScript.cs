@@ -22,9 +22,17 @@ public class EnemyScript : MonoBehaviour
     public GameObject fadeAnim;
     public GameObject display_1;
     public GameObject display_2;
+    public GameObject body;
+    public GameObject gems;
+    public GameObject outline_1;
+    public GameObject outline_2;
+
+
     public Color[] request_colors;
     public Color[] alien_colors;
+    public Color[] gem_colors;
     public Color[] freezing_colors;
+
 
     GameController Game;
     Vector2 randomDir;
@@ -72,6 +80,8 @@ public class EnemyScript : MonoBehaviour
         voicePitch = Random.Range(0, 2.5f);
         skinColor = alien_colors[Random.Range(0, alien_colors.Length)];
         sprite.color = skinColor;
+
+        generate_appearance();
     }
 
     // Update is called once per frame
@@ -242,4 +252,13 @@ public class EnemyScript : MonoBehaviour
         squisher.transform.localScale = new Vector3(Mathf.Pow(jiggle_amp, jiggle_offset), Mathf.Pow(jiggle_amp,-jiggle_offset), 0);
     }
 
+    private void generate_appearance()
+    {
+        outline_1.GetComponent<SpriteRenderer>().color = request_colors[request_id1];
+        outline_2.GetComponent<SpriteRenderer>().color = request_colors[request_id2];
+        body.GetComponent<SpriteRenderer>().color = alien_colors[request_id1];
+        gems.GetComponent<SpriteRenderer>().color = request_colors[request_id2];
+
+    }
+    
 }
