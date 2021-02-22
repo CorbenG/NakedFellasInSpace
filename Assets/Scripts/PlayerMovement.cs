@@ -165,4 +165,9 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void push(Vector2 where)
+    {
+        velocity += where;
+    }
+
 }
