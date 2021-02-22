@@ -8,6 +8,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject bubbleSprite;
     public GameObject bounceSound;
     public GameObject voiceSound;
+    public GameObject freezeSound;
     public GameObject squisher;
     public float minSpeed;
     public float maxSpeed;
@@ -101,7 +102,9 @@ public class EnemyScript : MonoBehaviour
             bubbleSprite.SetActive(false);
             if (!lostLife)
             {
+                Instantiate(freezeSound);
                 Game.health -= 1;
+                Game.updateHealth();
                 lostLife = true;
             }
             if (Vector3.Magnitude(transform.position) > 12)

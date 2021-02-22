@@ -54,6 +54,7 @@ MonoBehaviour:
   bubbleSprite: {fileID: 6487019433043121401}
   bounceSound: {fileID: 6037235827620382486, guid: 1cd3ecfd9607aa5459ab4b04addf1b22, type: 3}
   voiceSound: {fileID: 5525279633594346110, guid: 6d1195242b304944e849e98dcbe9fee3, type: 3}
+  freezeSound: {fileID: 7004040432087475355, guid: 03e4ea7eb3258564cbb300d900327ab2, type: 3}
   squisher: {fileID: 1831056832405570501}
   minSpeed: 2
   maxSpeed: 4
