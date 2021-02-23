@@ -21,4 +21,9 @@ public class EnemySpawn : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    
+    private IEnumerator waitndestroy()
+    {
+        yield return new WaitForSeconds(1);
+    }
 }

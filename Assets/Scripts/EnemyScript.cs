@@ -26,6 +26,10 @@ public class EnemyScript : MonoBehaviour
     public GameObject gems;
     public GameObject outline_1;
     public GameObject outline_2;
+    public GameObject pants;
+    public GameObject shirt;
+    public GameObject boxers;
+    public GameObject no;
 
 
     public Color[] request_colors;
@@ -67,7 +71,9 @@ public class EnemyScript : MonoBehaviour
         id2_satisfied = needs_one;
         request_id1 = Random.Range(0, 4);
         request_id2 = Random.Range(0, 4);
-
+        pants.SetActive(false);
+        shirt.SetActive(false);
+        boxers.SetActive(true);
 
         Game = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         rb = GetComponent<Rigidbody2D>();
@@ -199,7 +205,10 @@ public class EnemyScript : MonoBehaviour
             freezeTimer -= freezeTime / 2;
             id1_satisfied = true;
             Game.updateScore(100);
-        } 
+            pants.SetActive(true);
+            pants.GetComponent<SpriteRenderer>().color = request_colors[request_id1];
+            boxers.SetActive(false);
+        }
         else if ((id == request_id2) && !id2_satisfied)
         {
             //alienSprite.GetComponent<Animator>().speed = 1;
@@ -209,12 +218,18 @@ public class EnemyScript : MonoBehaviour
             freezeTimer -= freezeTime / 2;
             id2_satisfied = true;
             Game.updateScore(100);
+            shirt.SetActive(true);
+            shirt.GetComponent<SpriteRenderer>().color = request_colors[request_id2];
+        }
+        else
+        {
+            no.GetComponent<AudioSource>().pitch = voicePitch;
+            no.GetComponent<AudioSource>().Play();
         }
 
         if (id1_satisfied && id2_satisfied)
         {
-            Instantiate(fadeAnim, transform.position, transform.rotation);
-            Destroy(gameObject);
+            StartCoroutine(waitndestroy(0.5f));
         }
     }
 
@@ -260,5 +275,12 @@ public class EnemyScript : MonoBehaviour
         gems.GetComponent<SpriteRenderer>().color = request_colors[request_id2];
 
     }
-    
+
+    private IEnumerator waitndestroy(float wait_time)
+    {
+        yield return new WaitForSeconds(wait_time);
+        Instantiate(fadeAnim, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
+
 }
