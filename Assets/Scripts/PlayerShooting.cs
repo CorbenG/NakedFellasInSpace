@@ -7,6 +7,7 @@ public class PlayerShooting : MonoBehaviour
 {
 
     int AmmoType = 0;
+    public int ammo = 6;
 
     public GameObject AmmoTypeDisplay;
     public GameObject Projectile;
@@ -95,8 +96,9 @@ public class PlayerShooting : MonoBehaviour
             //anim.SetBool("Hold", true);
             fired = false;
         }
-        else if (!MouseDown && !fired)
+        else if (!MouseDown && !fired && ammo > 0)
         {
+            ammo--;
             fired = true;
             cooldownTimer = 0;
             anim.SetTrigger("Shooting");
