@@ -117,6 +117,7 @@ public class PlayerShooting : MonoBehaviour
             Camera.GetComponent<CameraShaker>().JerkOffest += ProjectileDirection * Camera.GetComponent<CameraShaker>().ShotJerk;
             GetComponent<PlayerMovement>().push(ProjectileDirection * -100);
         }
+
         if (Input.GetMouseButton(0))
         {
             MouseDown = true;
@@ -124,6 +125,11 @@ public class PlayerShooting : MonoBehaviour
         if (!Input.GetMouseButton(0) && cooldownTimer >= shootCooldown)
         {
             MouseDown = false;
+        }
+
+        if (Input.GetKey("r"))
+        {
+            ammo = 6;
         }
     }
 }

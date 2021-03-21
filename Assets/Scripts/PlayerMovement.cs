@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D body;
     GameObject Camera;
     GameController game;
-    Vector2 velocity;
+    public Vector2 velocity;
     // Start is called before the first frame update
     void Start()
     {
