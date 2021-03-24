@@ -28,6 +28,8 @@ public class PlayerShooting : MonoBehaviour
     Color currentAmmoColor;
     bool MouseDown = true;
     bool fired = true;
+    public int ammoPerBox = 5;
+    public int ammoMax = 15;
 
     GameController game;
 
@@ -103,6 +105,7 @@ public class PlayerShooting : MonoBehaviour
             fired = true;
             cooldownTimer = 0;
             anim.SetTrigger("Shooting");
+            SpawnPopup(ammo.ToString());
             /*
             anim.SetBool("Hold", false);
             anim.SetBool("Shoot", true);
@@ -111,8 +114,6 @@ public class PlayerShooting : MonoBehaviour
             NewProjectile.GetComponent<ProjectileMover>().MovementDirection = ProjectileDirection;
             NewProjectile.GetComponent<ProjectileMover>().AmmoType = AmmoType;
 
-            GameObject NewPopup = Instantiate(ammoPopup, transform.position, Quaternion.identity);
-            NewPopup.GetComponentInChildren<TextMesh>().text = ammo.ToString();
             // Debug.Log(AmmoType);
             GunSound.pitch = Random.Range(0.9f, 1.1f);
             GunSound.Play();
@@ -135,5 +136,22 @@ public class PlayerShooting : MonoBehaviour
         {
             ammo = 6;
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ammo")
+        {
+            Destroy(collision.gameObject);
+            ammo += ammoPerBox;
+            ammo = Mathf.Min(ammo, ammoMax);
+            SpawnPopup("+" + ammo.ToString());
+        }
+    }
+
+    void SpawnPopup(string popupText)
+    {
+        GameObject NewPopup = Instantiate(ammoPopup, transform.position, Quaternion.identity);
+        NewPopup.GetComponentInChildren<TextMesh>().text = popupText;
     }
 }

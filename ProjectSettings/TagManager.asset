@@ -9,6 +9,7 @@ TagManager:
   - WorldBorderTop
   - WorldBorderSide
   - Target
+  - Ammo
   layers:
   - Default
   - TransparentFX
