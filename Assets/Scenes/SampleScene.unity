@@ -403,6 +403,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 803969506774657571, guid: 173d8f9b7cc16ca4a85e9649f69e2373, type: 3}
+  ammoPrefab: {fileID: 7749358481959068665, guid: 166ef7eda9c9a004a95657c8f333bddb, type: 3}
+  enemiesPerAmmo: 2
   spawnTime: 5
   spawnIncreaseFactor: 100000
   score: 0

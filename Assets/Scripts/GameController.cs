@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject ammoPrefab;
+    public float enemiesPerAmmo;
+    float ammoCountdown;
     public float spawnTime;
     private float spawnTimerCounter;
     public float spawnIncreaseFactor;
@@ -48,6 +51,12 @@ public class GameController : MonoBehaviour
         if(spawnTimerCounter <= 0)
         {
             Instantiate(enemyPrefab, new Vector3(Random.Range(-7, 7), Random.Range(-3, 3), 0), transform.rotation);
+            ammoCountdown += 1;
+            if (ammoCountdown > enemiesPerAmmo)
+            {
+                ammoCountdown -= enemiesPerAmmo;
+                Instantiate(ammoPrefab, new Vector3(Random.Range(-7, 7), Random.Range(-3, 3), 0), transform.rotation);
+            }
             spawnTimerCounter = spawnTime;
         }
         spawnTimerCounter -= Time.deltaTime + ((Time.time - currentGameStart) / spawnIncreaseFactor);

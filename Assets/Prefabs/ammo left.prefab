@@ -84,12 +84,12 @@ TextMesh:
   m_GameObject: {fileID: 5798428376524248623}
   m_Text: 10
   m_OffsetZ: 0
-  m_CharacterSize: 0.21
+  m_CharacterSize: 0.2
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 65
+  m_FontSize: 64
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ad14354537f19ef4dac9203046708790, type: 3}
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 30
-  xMaxInitialVelocity: 10
-  yMaxInitialVelocity: 20
+  xMaxInitialVelocity: 5
+  yMaxInitialVelocity: 15
   velocity: {x: 0, y: 0, z: 0}
   MaxRotateSpeed: 500
