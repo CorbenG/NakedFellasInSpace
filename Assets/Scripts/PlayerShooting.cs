@@ -16,6 +16,7 @@ public class PlayerShooting : MonoBehaviour
     public GameObject Graphics;
     public GameObject Border;
     public GameObject yarn;
+    public GameObject ammoPopup;
     public float DisplayLerpSpeed;
     public float StartingOffest;
     public float ColorLerp;
@@ -109,6 +110,9 @@ public class PlayerShooting : MonoBehaviour
             GameObject NewProjectile = Instantiate(Projectile, transform.position + ProjectileDirection * StartingOffest, Quaternion.identity);
             NewProjectile.GetComponent<ProjectileMover>().MovementDirection = ProjectileDirection;
             NewProjectile.GetComponent<ProjectileMover>().AmmoType = AmmoType;
+
+            GameObject NewPopup = Instantiate(ammoPopup, transform.position, Quaternion.identity);
+            NewPopup.GetComponentInChildren<TextMesh>().text = ammo.ToString();
             // Debug.Log(AmmoType);
             GunSound.pitch = Random.Range(0.9f, 1.1f);
             GunSound.Play();

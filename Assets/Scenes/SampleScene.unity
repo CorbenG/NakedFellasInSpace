@@ -1689,6 +1689,7 @@ MonoBehaviour:
   AccelerationFactor: 30
   xWorldBounds: 8.5
   yWorldBounds: 4.6
+  velocity: {x: 0, y: 0}
 --- !u!50 &1090910029
 Rigidbody2D:
   serializedVersion: 4
@@ -1754,6 +1755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed79facea2568eb489d6a3d58bece1c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammo: 6
   AmmoTypeDisplay: {fileID: 577726482}
   Projectile: {fileID: 9136993367091692043, guid: c9505d52aa70db848aad7c68995e25e8, type: 3}
   Camera: {fileID: 519420028}
@@ -1761,6 +1763,7 @@ MonoBehaviour:
   Graphics: {fileID: 1611470926}
   Border: {fileID: 743660813}
   yarn: {fileID: 1583370557}
+  ammoPopup: {fileID: 5798428376524248623, guid: 465e8c85a15dc6d47b54e9b04195f84f, type: 3}
   DisplayLerpSpeed: 10
   StartingOffest: 1.5
   ColorLerp: 15
