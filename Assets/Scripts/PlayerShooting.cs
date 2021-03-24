@@ -142,10 +142,11 @@ public class PlayerShooting : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ammo")
         {
+            float oldammo = ammo;
             Destroy(collision.gameObject);
             ammo += ammoPerBox;
             ammo = Mathf.Min(ammo, ammoMax);
-            SpawnPopup("+" + ammo.ToString());
+            SpawnPopup("+" + (ammo - oldammo).ToString());
         }
     }
 
