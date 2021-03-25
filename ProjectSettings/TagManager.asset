@@ -10,6 +10,7 @@ TagManager:
   - WorldBorderSide
   - Target
   - Ammo
+  - Meteor
   layers:
   - Default
   - TransparentFX

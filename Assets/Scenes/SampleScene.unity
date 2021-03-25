@@ -548,9 +548,9 @@ MonoBehaviour:
   hazard: {fileID: 3758824923820355885, guid: 6cf52932cd3ab5145afeb3aba8eb8b75, type: 3}
   screenWidth: 10
   screenHeight: 6.5
-  meteoriteCooldown: 5
+  meteoriteCooldown: 7
   difficultyRamp: 0.1
-  minCooldown: 0
+  minCooldown: 1
 --- !u!1001 &147178091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1681,7 +1681,7 @@ GameObject:
   - component: {fileID: 1090910033}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2194,7 +2194,7 @@ Canvas:
   m_GameObject: {fileID: 1289693134}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

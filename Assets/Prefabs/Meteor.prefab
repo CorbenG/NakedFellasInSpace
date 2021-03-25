@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3758824923820355880}
   - component: {fileID: 3758824923820355883}
   - component: {fileID: 3758824923820355882}
+  - component: {fileID: 2180102577172934650}
   m_Layer: 0
   m_Name: Meteor
-  m_TagString: Untagged
+  m_TagString: Meteor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,4 +96,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7b10070ffd90e49bb19ac8f5415cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warningTime: 5
+  warning: {fileID: 986796579554683543, guid: 901dbcb707cefeb42b5ce53684fccf42, type: 3}
+  fadeAnim: {fileID: 3367925324947736952, guid: dad301ded9b40a04793a1316ecab71bd, type: 3}
+  vertWarningOffset: 3
+  horiWarningOffset: 3
+  direction: 0
   speed: 5
+--- !u!58 &2180102577172934650
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3758824923820355885}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.008116007}
+  serializedVersion: 2
+  m_Radius: 0.5186374

@@ -24,14 +24,15 @@ public class HazardController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        targetTime = meteoriteCooldown;
-        currentCD = meteoriteCooldown;
+        currentCD = Time.time + meteoriteCooldown;
+        targetTime = currentCD;
+        counter = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(counter >= targetTime)
+        if(counter >= targetTime && !gameObject.GetComponent<GameController>().gameOver)
         {
             targetTime = Time.time + currentCD;
             currentCD -= difficultyRamp;
@@ -43,22 +44,26 @@ public class HazardController : MonoBehaviour
             //Top
             if(side == 0)
             {
-                Instantiate(hazard, new Vector3(Random.Range(-screenWidth, screenWidth), screenHeight, 0), transform.rotation);
+                GameObject newHazard = Instantiate(hazard, new Vector3(Random.Range(-(screenWidth - 2), (screenWidth - 2)), screenHeight, 0), transform.rotation);
+                newHazard.GetComponent<HazardProjectile>().direction = 0;
             }
             //Bottom
             else if (side == 1)
             {
-                Instantiate(hazard, new Vector3(Random.Range(-screenWidth, screenWidth), -screenHeight, 0), transform.rotation);
+                GameObject newHazard = Instantiate(hazard, new Vector3(Random.Range(-(screenWidth - 2), (screenWidth - 2)), -screenHeight, 0), transform.rotation);
+                newHazard.GetComponent<HazardProjectile>().direction = 1;
             }
             //Left Side
             else if (side == 2)
             {
-                Instantiate(hazard, new Vector3(-screenWidth, Random.Range(-screenHeight, screenHeight), 0), transform.rotation);
+                GameObject newHazard = Instantiate(hazard, new Vector3(-screenWidth, Random.Range(-(screenHeight - 2), (screenHeight - 2)), 0), transform.rotation);
+                newHazard.GetComponent<HazardProjectile>().direction = 2;
             }
             //Right Side
             else if (side == 2)
             {
-                Instantiate(hazard, new Vector3(screenWidth, Random.Range(-screenHeight, screenHeight), 0), transform.rotation);
+                GameObject newHazard = Instantiate(hazard, new Vector3(screenWidth, Random.Range(-(screenHeight - 2), (screenHeight - 2)), 0), transform.rotation);
+                newHazard.GetComponent<HazardProjectile>().direction = 3;
             }
         }
 

@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = -velocity.y;
             //Minimum bounce distance
-            if(velocity.y > 0 && velocity.y < 2)
+            if (velocity.y > 0 && velocity.y < 2)
             {
                 velocity.y = 2;
             }
@@ -151,19 +151,7 @@ public class PlayerMovement : MonoBehaviour
             }
             //speed.x = -speed.x * BorderPushbackForce;
         }
-
-    }
-    void OnCollisionStay2D(Collision2D collision)
-    {
         
-        /*
-        if (collision.gameObject.tag == "WorldBorderTop" || collision.gameObject.tag == "WorldBorderSide")
-        {
-            
-            //speed -= new Vector3(9.0f * transform.position.x, 16.0f * transform.position.y, 0.0f) * BorderPushbackForce;
-        }
-        */
-
     }
 
     public void push(Vector2 where)
