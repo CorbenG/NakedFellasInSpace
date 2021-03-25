@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class PlayerShooting : MonoBehaviour
     public int ammoMax = 15;
 
     GameController game;
+
+    public AudioClip ammoPickupClip;
+    public AudioClip emptyClip;
 
     // Start is called before the first frame update
     void Start()
@@ -89,12 +93,12 @@ public class PlayerShooting : MonoBehaviour
         Vector3 WorldMousePosition = Camera.GetComponent<Camera>().ScreenToWorldPoint(MousePosition);
         Vector3 ProjectileDirection = new Vector3(WorldMousePosition.x - transform.position.x, WorldMousePosition.y - transform.position.y, 0).normalized;
         Gun.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2((WorldMousePosition.y - Gun.transform.position.y) * Graphics.transform.localScale.x, (WorldMousePosition.x - Gun.transform.position.x) * Graphics.transform.localScale.x) * Mathf.Rad2Deg);
-        Graphics.transform.localScale = new Vector3(Mathf.Sign(ProjectileDirection.x)*1.0f,Graphics.transform.localScale.y,Graphics.transform.localScale.z);
+        Graphics.transform.localScale = new Vector3(Mathf.Sign(ProjectileDirection.x) * 1.0f, Graphics.transform.localScale.y, Graphics.transform.localScale.z);
         anim.SetBool("Shoot", false);
         cooldownTimer += Time.deltaTime;
 
 
-        
+
         if (!MouseDown)
         {
             fired = false;
@@ -122,9 +126,14 @@ public class PlayerShooting : MonoBehaviour
             Camera.GetComponent<CameraShaker>().JerkOffest += ProjectileDirection * Camera.GetComponent<CameraShaker>().ShotJerk;
             GetComponent<PlayerMovement>().push(ProjectileDirection * -100);
         }
+        else if (MouseDown && !fired && ammo <= 0)
+        {
+            GetComponent<AudioSource>().PlayOneShot(emptyClip);
+            fired = true;
+        }
 
 
-        if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0))
         {
             MouseDown = true;
         }
@@ -148,6 +157,7 @@ public class PlayerShooting : MonoBehaviour
             ammo += ammoPerBox;
             ammo = Mathf.Min(ammo, ammoMax);
             SpawnPopup("+" + (ammo - oldammo).ToString());
+            GetComponent<AudioSource>().PlayOneShot(ammoPickupClip);
         }
     }
 

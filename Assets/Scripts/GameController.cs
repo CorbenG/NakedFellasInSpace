@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class GameController : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class GameController : MonoBehaviour
 
     float currentGameStart;
 
+    public AudioClip ammoSpawnClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +57,7 @@ public class GameController : MonoBehaviour
             ammoCountdown += 1;
             if (ammoCountdown > enemiesPerAmmo)
             {
+                GetComponent<AudioSource>().PlayOneShot(ammoSpawnClip);
                 ammoCountdown -= enemiesPerAmmo;
                 Instantiate(ammoPrefab, new Vector3(Random.Range(-7, 7), Random.Range(-3, 3), 0), transform.rotation);
             }

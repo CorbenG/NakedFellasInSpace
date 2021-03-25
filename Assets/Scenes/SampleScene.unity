@@ -423,6 +423,7 @@ MonoBehaviour:
   popAnim: {fileID: 3434763270632756894, guid: fa08bc2763a9697459fffc3795253e26, type: 3}
   gameOverSound: {fileID: 1223340352631841639, guid: 537aef4bf1e6d504f89e8d8b55ca412f, type: 3}
   gameOver: 0
+  ammoSpawnClip: {fileID: 8300000, guid: de92025074318c34a93c53f48366c67e, type: 3}
 --- !u!4 &130671293
 Transform:
   m_ObjectHideFlags: 0
@@ -1798,6 +1799,8 @@ MonoBehaviour:
   shootCooldown: 0.4
   ammoPerBox: 5
   ammoMax: 15
+  ammoPickupClip: {fileID: 8300000, guid: 0ae8e0f0d45179d47b079169e503b694, type: 3}
+  emptyClip: {fileID: 8300000, guid: 0d6db233ca21afc42bc12e76d4a3a4d8, type: 3}
 --- !u!82 &1090910033
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3008,7 +3011,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727504225}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: -2.67, z: 1.7816}
+  m_LocalPosition: {x: 0, y: -2.3, z: 1.7816}
   m_LocalScale: {x: 3.2086, y: 4.278133, z: 0.64172}
   m_Children: []
   m_Father: {fileID: 699311343}
