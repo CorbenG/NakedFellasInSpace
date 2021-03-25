@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class HazardProjectile : MonoBehaviour
 {
@@ -20,9 +21,14 @@ public class HazardProjectile : MonoBehaviour
     public float speed;
 
     float counter;
+
+    public AudioClip hitSound;
+    public AudioClip warningSound;
+
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.Find("GameController").GetComponent<AudioSource>().PlayOneShot(warningSound);
         player = GameObject.Find("Player");
         
         GameObject newWarning = Instantiate(warning, transform.position, Quaternion.identity);
@@ -42,11 +48,11 @@ public class HazardProjectile : MonoBehaviour
             newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + horiWarningOffset, transform.position.y, transform.position.z));
         }
         //Right Side
-        else if (direction == 2)
+        else if (direction == 3)
         {
             newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x - horiWarningOffset, transform.position.y, transform.position.z));
         }
-        newWarning.GetComponent<EnemySpawn>().aliveTime = warningTime;
+        newWarning.GetComponent<EnemySpawn>().aliveTime = warningTime + 0.5f;
         newWarning.transform.SetParent(GameObject.Find("Canvas").transform);
     }
 
@@ -74,7 +80,9 @@ public class HazardProjectile : MonoBehaviour
         {
             GameObject.Find("GameController").GetComponent<GameController>().health -= 1;
             GameObject.Find("GameController").GetComponent<GameController>().updateHealth();
+            GameObject.Find("GameController").GetComponent<AudioSource>().PlayOneShot(hitSound);
             Instantiate(fadeAnim, transform.position, transform.rotation);
+
             Destroy(this.gameObject);
         }
     }

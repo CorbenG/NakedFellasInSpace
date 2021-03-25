@@ -60,7 +60,7 @@ public class HazardController : MonoBehaviour
                 newHazard.GetComponent<HazardProjectile>().direction = 2;
             }
             //Right Side
-            else if (side == 2)
+            else if (side == 3)
             {
                 GameObject newHazard = Instantiate(hazard, new Vector3(screenWidth, Random.Range(-(screenHeight - 2), (screenHeight - 2)), 0), transform.rotation);
                 newHazard.GetComponent<HazardProjectile>().direction = 3;

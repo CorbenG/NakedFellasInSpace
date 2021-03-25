@@ -96,13 +96,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7b10070ffd90e49bb19ac8f5415cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warningTime: 5
+  warningTime: 3
   warning: {fileID: 986796579554683543, guid: 901dbcb707cefeb42b5ce53684fccf42, type: 3}
   fadeAnim: {fileID: 3367925324947736952, guid: dad301ded9b40a04793a1316ecab71bd, type: 3}
   vertWarningOffset: 3
   horiWarningOffset: 3
   direction: 0
   speed: 5
+  hitSound: {fileID: 8300000, guid: fc12c0b4c6af1214790acd5115417151, type: 3}
+  warningSound: {fileID: 8300000, guid: 128f6d9b727b138438b63ab68da030a6, type: 3}
 --- !u!58 &2180102577172934650
 CircleCollider2D:
   m_ObjectHideFlags: 0
