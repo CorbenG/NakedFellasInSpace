@@ -54,6 +54,7 @@ public class HazardProjectile : MonoBehaviour
         }
         newWarning.GetComponent<EnemySpawn>().aliveTime = warningTime + 0.5f;
         newWarning.transform.SetParent(GameObject.Find("Canvas").transform);
+        newWarning.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
     }
 
     // Update is called once per frame
