@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 130671293}
   - component: {fileID: 130671292}
   - component: {fileID: 130671294}
+  - component: {fileID: 130671295}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -532,6 +533,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &130671295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130671291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4cc9830b489e904ea052204073b304e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hazard: {fileID: 3758824923820355885, guid: 6cf52932cd3ab5145afeb3aba8eb8b75, type: 3}
+  screenWidth: 10
+  screenHeight: 6.5
+  meteoriteCooldown: 5
+  difficultyRamp: 0.1
+  minCooldown: 0
 --- !u!1001 &147178091
 PrefabInstance:
   m_ObjectHideFlags: 0

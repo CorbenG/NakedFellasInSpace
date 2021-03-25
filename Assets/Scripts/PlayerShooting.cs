@@ -92,14 +92,14 @@ public class PlayerShooting : MonoBehaviour
         Graphics.transform.localScale = new Vector3(Mathf.Sign(ProjectileDirection.x)*1.0f,Graphics.transform.localScale.y,Graphics.transform.localScale.z);
         anim.SetBool("Shoot", false);
         cooldownTimer += Time.deltaTime;
-        
 
-        if (MouseDown)
+
+        
+        if (!MouseDown)
         {
-            //anim.SetBool("Hold", true);
             fired = false;
         }
-        else if (!MouseDown && !fired && ammo > 0)
+        else if (MouseDown && !fired && ammo > 0)
         {
             ammo--;
             fired = true;
@@ -122,6 +122,7 @@ public class PlayerShooting : MonoBehaviour
             Camera.GetComponent<CameraShaker>().JerkOffest += ProjectileDirection * Camera.GetComponent<CameraShaker>().ShotJerk;
             GetComponent<PlayerMovement>().push(ProjectileDirection * -100);
         }
+
 
         if (Input.GetMouseButton(0))
         {
