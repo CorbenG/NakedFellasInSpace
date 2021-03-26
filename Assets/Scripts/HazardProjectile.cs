@@ -40,21 +40,21 @@ public class HazardProjectile : MonoBehaviour
         //Bottom
         else if (direction == 1)
         {
-            newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + vertWarningOffset, transform.position.z));
+            newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + vertWarningOffset - 0.5f, transform.position.z));
         }
         //Left Side
         else if (direction == 2)
         {
-            newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + horiWarningOffset, transform.position.y, transform.position.z));
+            newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + horiWarningOffset - 0.5f, transform.position.y, transform.position.z));
         }
         //Right Side
         else if (direction == 3)
         {
-            newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x - horiWarningOffset, transform.position.y, transform.position.z));
+            newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x - horiWarningOffset + 0.5f, transform.position.y, transform.position.z));
         }
         newWarning.GetComponent<EnemySpawn>().aliveTime = warningTime + 0.5f;
         newWarning.transform.SetParent(GameObject.Find("Canvas").transform);
-        newWarning.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+        newWarning.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
     }
 
     // Update is called once per frame
