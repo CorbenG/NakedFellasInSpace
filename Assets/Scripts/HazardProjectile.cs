@@ -35,22 +35,26 @@ public class HazardProjectile : MonoBehaviour
         //Top
         if (direction == 0)
         {
-            newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y - vertWarningOffset, transform.position.z));
+            newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y - vertWarningOffset + 0.5f, transform.position.z));
+            newWarning.transform.eulerAngles = new Vector3(0, 0, 180);
         }
         //Bottom
         else if (direction == 1)
         {
             newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + vertWarningOffset - 0.5f, transform.position.z));
+            newWarning.transform.eulerAngles = new Vector3(0, 0, 0);
         }
         //Left Side
         else if (direction == 2)
         {
             newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + horiWarningOffset - 0.5f, transform.position.y, transform.position.z));
+            newWarning.transform.eulerAngles = new Vector3(0, 0, 270);
         }
         //Right Side
         else if (direction == 3)
         {
             newWarning.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x - horiWarningOffset + 0.5f, transform.position.y, transform.position.z));
+            newWarning.transform.eulerAngles = new Vector3(0, 0, 90);
         }
         newWarning.GetComponent<EnemySpawn>().aliveTime = warningTime + 0.5f;
         newWarning.transform.SetParent(GameObject.Find("Canvas").transform);
