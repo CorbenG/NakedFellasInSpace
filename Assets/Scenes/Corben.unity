@@ -1778,6 +1778,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 803969506774657571, guid: 173d8f9b7cc16ca4a85e9649f69e2373, type: 3}
+  ammoPrefab: {fileID: 7749358481959068665, guid: 166ef7eda9c9a004a95657c8f333bddb, type: 3}
+  enemiesPerAmmo: 0
   spawnTime: 5
   spawnIncreaseFactor: 100000
   score: 0
@@ -1795,6 +1797,7 @@ MonoBehaviour:
   popAnim: {fileID: 3434763270632756894, guid: fa08bc2763a9697459fffc3795253e26, type: 3}
   gameOverSound: {fileID: 1223340352631841639, guid: 537aef4bf1e6d504f89e8d8b55ca412f, type: 3}
   gameOver: 0
+  ammoSpawnClip: {fileID: 0}
 --- !u!82 &999236912
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2491,6 +2494,7 @@ MonoBehaviour:
   Graphics: {fileID: 852011329}
   Border: {fileID: 219018824}
   yarn: {fileID: 1172059312}
+  ammoPopup: {fileID: 7749358481959068665, guid: 166ef7eda9c9a004a95657c8f333bddb, type: 3}
   DisplayLerpSpeed: 10
   StartingOffest: 1.5
   ColorLerp: 15
@@ -2501,6 +2505,10 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0.69803923, a: 1}
   anim: {fileID: 948534624}
   shootCooldown: 0.4
+  ammoPerBox: 5
+  ammoMax: 15
+  ammoPickupClip: {fileID: 0}
+  emptyClip: {fileID: 0}
 --- !u!114 &1573876840
 MonoBehaviour:
   m_ObjectHideFlags: 0
