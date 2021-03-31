@@ -26,6 +26,8 @@ public class EnemyScript : MonoBehaviour
     public GameObject gems;
     public GameObject outline_1;
     public GameObject outline_2;
+    public GameObject outline_3;
+    public GameObject outline_4;
     public GameObject pants;
     public GameObject shirt;
     public GameObject boxers;
@@ -206,6 +208,10 @@ public class EnemyScript : MonoBehaviour
             id1_satisfied = true;
             Game.updateScore(100);
             pants.SetActive(true);
+            outline_1.SetActive(false);
+            outline_2.SetActive(false);
+            outline_3.SetActive(true);
+            outline_4.SetActive(true);
             pants.GetComponent<SpriteRenderer>().color = request_colors[request_id1];
             boxers.SetActive(false);
         }
@@ -271,6 +277,10 @@ public class EnemyScript : MonoBehaviour
     {
         outline_1.GetComponent<SpriteRenderer>().color = request_colors[request_id1];
         outline_2.GetComponent<SpriteRenderer>().color = request_colors[request_id2];
+        outline_3.GetComponent<SpriteRenderer>().color = request_colors[request_id1];
+        outline_4.GetComponent<SpriteRenderer>().color = request_colors[request_id2];
+        outline_3.SetActive(false);
+        outline_4.SetActive(false);
         body.GetComponent<SpriteRenderer>().color = alien_colors[request_id1];
         gems.GetComponent<SpriteRenderer>().color = request_colors[request_id2];
 
