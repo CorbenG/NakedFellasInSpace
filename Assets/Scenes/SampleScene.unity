@@ -551,7 +551,7 @@ MonoBehaviour:
   screenHeight: 6.5
   meteoriteCooldown: 7
   difficultyRamp: 0.1
-  minCooldown: 0.5
+  minCooldown: 1
 --- !u!1001 &147178091
 PrefabInstance:
   m_ObjectHideFlags: 0
