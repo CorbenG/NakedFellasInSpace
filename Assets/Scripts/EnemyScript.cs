@@ -126,8 +126,8 @@ public class EnemyScript : MonoBehaviour
             if (!lostLife)
             {
                 Instantiate(freezeSound);
-                Game.health -= 1;
-                Game.updateHealth();
+                //Game.health -= 1;
+                //Game.updateHealth();
                 lostLife = true;
             }
             if (Vector3.Magnitude(transform.position) > 12)
