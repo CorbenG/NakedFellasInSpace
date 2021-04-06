@@ -24,8 +24,8 @@ public class HazardController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentCD = Time.time + meteoriteCooldown;
-        targetTime = currentCD;
+        currentCD = meteoriteCooldown;
+        targetTime = Time.time + meteoriteCooldown;
         counter = Time.time;
     }
 
