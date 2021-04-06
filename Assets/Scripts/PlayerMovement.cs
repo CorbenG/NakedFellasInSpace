@@ -66,11 +66,26 @@ public class PlayerMovement : MonoBehaviour
             //Slow down if no input
             if (Input.GetAxisRaw("Horizontal") == 0)
             {
-                velocity.x = velocity.x / DecelerationFactor;
+                if(velocity.x > 0.1f)
+                {
+                    velocity.x -= velocity.x/MaxSpeed * DecelerationFactor * Time.deltaTime;
+                }
+                else if (velocity.x < 0.1f)
+                {
+                    velocity.x += -velocity.x / MaxSpeed * DecelerationFactor * Time.deltaTime;
+                }
+
             }
             if (Input.GetAxisRaw("Vertical") == 0)
             {
-                velocity.y = velocity.y / DecelerationFactor;
+                if (velocity.y > 0.1f)
+                {
+                    velocity.y -= velocity.y / MaxSpeed * DecelerationFactor * Time.deltaTime;
+                }
+                else if (velocity.y < 0.1f)
+                {
+                    velocity.y += -velocity.y / MaxSpeed * DecelerationFactor * Time.deltaTime;
+                }
             }
 
             //Limit position to world bounds

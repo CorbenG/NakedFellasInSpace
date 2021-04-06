@@ -1805,8 +1805,8 @@ MonoBehaviour:
   MaxSquish: 1.2
   graphics: {fileID: 1611470926}
   bounceSound: {fileID: 6037235827620382486, guid: 1cd3ecfd9607aa5459ab4b04addf1b22, type: 3}
-  DecelerationFactor: 1.005
-  AccelerationFactor: 30
+  DecelerationFactor: 15
+  AccelerationFactor: 35
   xWorldBounds: 8.5
   yWorldBounds: 4.6
   velocity: {x: 0, y: 0}
